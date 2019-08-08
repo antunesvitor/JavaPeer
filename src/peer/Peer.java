@@ -17,7 +17,6 @@ public class Peer {
 		this.porta = Integer.parseInt(porta);
 		this.caminho = caminho;
 		this.IP = IP;
-		
 		metadadosLocais = new ArrayList<Metadata>();
 		vizinhos = new ArrayList<Vizinho>();
 		
@@ -64,10 +63,20 @@ public class Peer {
 		return false;
 	}
 	
+	public Metadata getArquivo(String nome) {
+		for(Metadata metadados : metadadosLocais) 
+		{
+			if(metadados.toString().equals(nome)) 
+				return metadados;
+		}
+		return null;
+	}
+	
 	public void start() 
 	{
-		FileReader fileReader = new FileReader(this, 3000);
+		FileReader fileReader = new FileReader(this, 200);
 		UDPListener listen = new UDPListener(this);
+		
 		fileReader.start();
 		listen.start();
 	}

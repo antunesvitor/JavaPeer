@@ -2,6 +2,7 @@ package peer;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,8 +31,7 @@ public class FileReader extends Thread{
 				for(int i = 0;i < listaDeArquivos.length;i++) 
 				{
 					BasicFileAttributes attr;
-					Path file = Paths.get(caminho);
-					
+					Path file = FileSystems.getDefault().getPath(listaDeArquivos[i]+"");
 					attr = Files.readAttributes(file, BasicFileAttributes.class);
 					
 					Metadata metadado = new Metadata(attr, listaDeArquivos[i].getName(), this.peer.nome);

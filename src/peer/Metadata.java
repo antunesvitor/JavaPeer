@@ -5,10 +5,13 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class Metadata {
 	
 	private String nomeArquivo;
+	public long tamanhoArquivo;
 	public String peerDono;
 	
 	
 	public Metadata(BasicFileAttributes atributos, String nomeArquivo, String peerDono) {
+		this.tamanhoArquivo = atributos.size();
+		System.out.println("TAMANHO DO ARQUIVO " + nomeArquivo + ": "+atributos.size());
 		this.nomeArquivo = nomeArquivo; 
 		this.peerDono = peerDono;
 	}

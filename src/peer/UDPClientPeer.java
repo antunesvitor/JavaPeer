@@ -16,18 +16,18 @@ public class UDPClientPeer {
 		this.peer = peer;
 	}
 	
-	public void enviaConfirmacaoArquivo(String IPCliente, int portaCliente) {
+	public void enviaConfirmacaoArquivo(String IPCliente, int portaCliente, Metadata arquivo) {
 		
-		String msg = String.format("%s;%d", peer.IP, peer.porta);
+		String msg = String.format("%d",arquivo.tamanhoArquivo);
 		enviarMensagem(msg, IPCliente, portaCliente);
 	}
 	
-	public void encaminhaRequisicaoDeArquivo(String IPCliente, int portaCliente, String nomeArquivo, int TTL){
+	public void encaminhaRequisicaoDeArquivo(String IPCliente, int portaCliente, String nomeArquivo, int TTL, int portaClienteTCP){
 		
 		Vizinho proximoPeer = peer.getVizinhoAleatorio();
-		String msg = String.format("%s;%d;%s;%d", IPCliente, portaCliente, nomeArquivo, TTL);
+		String msg = String.format("%s;%d;%s;%d;%d", IPCliente, portaCliente, nomeArquivo, TTL, portaClienteTCP);
 		
-		System.out.printf("Console %s: recebendo pesquisa %s, NÃO tenho o arquivo, encaminho para %s.\n", peer.nome, nomeArquivo, proximoPeer.nome);
+		System.out.printf("Console %s: recebendo pesquisa %s, NAO tenho o arquivo, encaminho para %s.\n", peer.nome, nomeArquivo, proximoPeer.nome);
 		
 		enviarMensagem(msg, proximoPeer.IP, proximoPeer.porta);
 	}
